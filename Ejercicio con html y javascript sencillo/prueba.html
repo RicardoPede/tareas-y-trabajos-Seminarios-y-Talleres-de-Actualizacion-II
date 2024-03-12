@@ -1,0 +1,24 @@
+<h1>hola</h1>
+
+<input id="texto" value=''></input>
+<button onclick="ejecutar()">Verificar</button>
+<br>
+<br>
+<label id="idTexto"></label>
+
+<script>
+	function ejecutar() {
+		var texto = document.getElementById("texto").value;
+		if (texto === "") {
+			var mensaje = document.getElementById("idTexto");
+			mensaje.textContent = "¡Cargue algo por favor!";
+			mensaje.style.color = "red";
+			mensaje.style.backgroundColor = "yellow";
+		} else {
+			console.log('el texto ingresado es: ', texto);
+			var mensaje = document.getElementById("idTexto");
+			mensaje.textContent = ""; 
+			alert('el texto ingresado es: ' + texto);
+		}
+	}
+</script>

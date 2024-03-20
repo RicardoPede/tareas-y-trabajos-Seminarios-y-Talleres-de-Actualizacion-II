@@ -7,6 +7,9 @@
 <label id="idTexto"></label>
 
 <script>
+	let escuchador = document.getElementById("texto").addEventListener("input", function(event) {
+		document.getElementById("idTexto").style.display = "none";
+	});
 	function ejecutar() {
 		var texto = document.getElementById("texto").value;
 		if (texto === "") {

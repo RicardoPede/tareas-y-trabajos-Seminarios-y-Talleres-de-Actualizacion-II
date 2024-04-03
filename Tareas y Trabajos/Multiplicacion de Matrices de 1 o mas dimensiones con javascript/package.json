@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.0"
+  },
+  "name": "multiplicacion-de-matrices-de-1-o-mas-dimensiones-con-javascript",
+  "version": "1.0.0",
+  "main": "client.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon servidor.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

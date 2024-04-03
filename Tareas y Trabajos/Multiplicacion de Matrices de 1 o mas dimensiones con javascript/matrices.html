@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <h2>SUMA DE MATRICES DE 1 O MAS DIMENSIONES CON JAVASCRIPT</h2>
+    <h1>Multiplicación de Matrices</h1>
     <div class="card container">
         <div class="card-body">
             <h5 class="card-title text-center">Ingrese las dimensiones de las matrices</h5>
@@ -24,7 +24,7 @@
                     <input type="number" class="form-control" id="cols" placeholder="Ingrese el número de columnas">
                 </div>
             </div>
-            <button id="generateButton" onclick="generateInputs()" class="btn btn-primary">Generar Matrices</button>
+            <button onclick="generateMatrices()" class="btn btn-primary">Generar Matrices</button>
         </div>
         <div class="container-fluid">
             <div class="row">
@@ -35,12 +35,19 @@
         </div>
     </div>
     <div class="card-footer">
-        <button id="sumButton" onclick="sumMatrices()" class="btn btn-primary">Sumar Matrices</button>
+        <div id="matrix1"></div>
+        <div id="matrix2"></div>
     </div>
-    <div class="card-footer">
-        <div id="result">2</div>
+    <div class="text-center">
+        <button onclick="multiplyMatrices()" class="btn btn-primary">Multiplicar Matrices</button>
     </div>
-    <!-- Importación de Bootstrap JS y dependencias -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col text-center">
+                <div id="result">Aquí aparecerá el Resultado</div>
+            </div>
+        </div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="client.js"></script>

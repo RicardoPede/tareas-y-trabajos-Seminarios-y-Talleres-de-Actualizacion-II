@@ -1,19 +1,26 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const path = require('path');
+import express from 'express';
+import bodyParser from 'body-parser';
+import path from 'path';
 const app = express();
 
 app.use(bodyParser.json());
 
 app.use(express.static(__dirname));
 
+app.use(express.json());
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'matrices.html'));
 });
 
 app.post('/sum', (req, res) => {
-    let matrix1 = req.body.matrix1;
-    let matrix2 = req.body.matrix2;
+    console.log('Suma de matrices');
+    console.log('req.body', req.body)
+    console.log('matrix1', req.body.matrix1);
+    console.log('matrix2', req.body.matrix2);
+    const matrix1 = req.body.matrix1;
+    const matrix2 = req.body.matrix2;
+    console.log("matrix", matrix1, matrix2);
     let result = [];
     for (let i = 0; i < matrix1.length; i++) {
         result.push([]);

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TensorFlow</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+</head>
+
+<body class="bg-primary">
+    <div class="container text-center justify-content-center">
+        <h1 class="mt-5">TensorFlow.js Example</h1>
+        <div class="row justify-content-center mb-3">
+            <p class="bg-danger w-25"><b>Formula: y = 2x + 6</b></p>
+        </div>
+        <div class="row justify-content-center align-items-center mb-3">
+            <button id="train" class="btn btn-success border" active>Train Model</button>
+            <div class="col-3">
+                <input type="number" id="input" class="form-control" placeholder='Ingrese el valor de "x"' />
+            </div>
+            <button id="predict" class="btn btn-success border" disabled="true">Predict</button>
+        </div>
+        <div class="align-items-center">
+            <h2 id="output" class="mt-3"></h2>
+            <div id="image-container"></div>
+        </div>
+    </div>
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // Crear modelo
+            const model = tf.sequential();
+            model.add(tf.layers.dense({ units: 1, inputShape: [1] }));
+            model.compile({ loss: 'meanSquaredError', optimizer: 'sgd' });
+
+            // Entrenar modelo
+            async function trainModel() {
+                console.log('Training model...');
+                const xs = tf.tensor2d([-6, -5, -4, -3, -2, -1, 0, 1, 2], [9, 1]);
+                const ys = tf.tensor2d([-6, -4, -2, 0, 2, 4, 6, 8, 10], [9, 1]);
+                await model.fit(xs, ys, { epochs: 250 });
+                console.log('Model trained!');
+            }
+
+            // Predecir
+            async function predict() {
+                const input = document.getElementById('input').value;
+                const output = model.predict(tf.tensor2d([+input], [1, 1]));
+                document.getElementById('output').innerText = 'The result of predicting for ' + input + ' is: ' + output.dataSync();
+            }
+
+            // Eventos
+            document.getElementById('train').addEventListener('click', function () {
+                trainModel().then(() => {
+                    document.getElementById('predict').disabled = false,
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Modelo entrenado!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                })
+            });
+            document.getElementById('predict').addEventListener('click', function () {
+                if (document.getElementById('input').value === '') {
+                    return Swal.fire({
+                        icon: 'error',
+                        title: 'Ingrese un valor!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                } else {
+                    let img = document.createElement('img');
+                    img.src = 'mqdefault.jpg';
+                    document.getElementById('image-container').appendChild(img);
+                    predict();
+                    document.getElementById('input').value = '';
+                }
+            });
+            document.getElementById('input').addEventListener('input', function () {
+                document.getElementById('output').innerText = '';
+                document.getElementById('image-container').innerHTML = '';
+            });
+
+            document.getElementById('predict').disabled = true;
+        });
+    </script>
+</body>
+
+</html>

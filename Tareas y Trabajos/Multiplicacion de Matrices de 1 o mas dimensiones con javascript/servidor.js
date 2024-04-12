@@ -20,10 +20,7 @@ app.get('/', (req, res) => {
 
 app.post('/multiplicar', async (req, res) => {
     const { matrix1, matrix2 } = req.body;
-    console.log('Matrix1:', matrix1);
-    console.log('Matrix2:', matrix2);
     const resultado = await multiplicarMatrices(matrix1, matrix2);
-    console.log('Resultado:', resultado);
     res.json({ resultado });
 });
 
@@ -48,10 +45,9 @@ async function multiplicarMatrices(matrix1, matrix2) {
             }
         }
     }
-    console.log('Resultado:', resultado);
     return resultado;
 }
 
-app.listen(3000, () => {
-    console.log('Servidor iniciado en http://localhost:3000');
+app.listen(5000, () => {
+    console.log('Servidor iniciado en http://localhost:5000');
 });
